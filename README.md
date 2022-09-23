@@ -1,5 +1,7 @@
 # coffee_shop_app
 
+![screenshot](./showcase/coffeshop-ui.png)
+
 A new Flutter project.
 
 ## Getting Started
