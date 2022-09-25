@@ -5,6 +5,7 @@ import 'package:coffee_shop_app/screens/home/widgets/my_bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
+import '../coffee_detail/coffee_details.dart';
 import 'widgets/coffee_cards/best_coffee_card.dart';
 import 'widgets/my_appbar.dart';
 import 'widgets/seach_bar.dart';
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 children: [
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.5,
-                    child: Section1(
+                    child: MyTabs(
                       tabController: tabController,
                     ),
                   ),
@@ -72,9 +73,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 }
 
-class Section1 extends StatelessWidget {
+class MyTabs extends StatelessWidget {
   final TabController tabController;
-  const Section1({super.key, required this.tabController});
+  const MyTabs({super.key, required this.tabController});
 
   @override
   Widget build(BuildContext context) {
@@ -137,25 +138,10 @@ class Section1 extends StatelessWidget {
             child: TabBarView(
               controller: tabController,
               children: [
-                SizedBox(
-                  height: 240,
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: firstTabData.length,
-                    itemBuilder: (_, index) {
-                      var coffee = firstTabData[index];
-
-                      return BestCoffeeCard(
-                        title: coffee.title,
-                        addon: coffee.addon,
-                        imageUrl: coffee.imageUrl,
-                        price: coffee.price,
-                        onTap: () {},
-                        onAddToCart: () {},
-                      );
-                    },
-                  ),
+                Column(
+                  children: [
+                    Section1(firstTabData: firstTabData),
+                  ],
                 ),
                 const Text('espress'),
                 const Text('Latte'),
@@ -165,6 +151,47 @@ class Section1 extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+class Section1 extends StatelessWidget {
+  const Section1({
+    Key? key,
+    required this.firstTabData,
+  }) : super(key: key);
+
+  final List<Coffee> firstTabData;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 240,
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount: firstTabData.length,
+        itemBuilder: (_, index) {
+          var coffee = firstTabData[index];
+
+          return BestCoffeeCard(
+            title: coffee.title,
+            addon: coffee.addon,
+            imageUrl: coffee.imageUrl,
+            price: coffee.price,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const CoffeeDetail(),
+                ),
+              );
+            },
+            onAddToCart: () {
+              showMyModal(context);
+            },
+          );
+        },
+      ),
     );
   }
 }
@@ -194,4 +221,23 @@ class MyGlassBoxx extends StatelessWidget {
       ),
     );
   }
+}
+
+void showMyModal(context) {
+  showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (_) => BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 4,
+              sigmaY: 4,
+            ),
+            child: Container(
+              color: Colors.black.withOpacity(0.9),
+              height: 470,
+              child: const Center(
+                child: Text('More Details here'),
+              ),
+            ),
+          ));
 }

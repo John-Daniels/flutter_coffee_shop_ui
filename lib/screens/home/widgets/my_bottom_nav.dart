@@ -28,7 +28,7 @@ class MyBottomBar extends StatelessWidget {
           icon: Image.asset(
             'assets/icons/home_icon.png',
             color: colorfy(index, 0),
-            height: 30,
+            height: 28,
           ),
           label: 'Home',
         ),
