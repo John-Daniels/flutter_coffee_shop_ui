@@ -36,7 +36,7 @@ class MyBottomBar extends StatelessWidget {
           icon: Image.asset(
             'assets/icons/shopping_bag_icon.png',
             color: colorfy(index, 1),
-            height: 30,
+            height: 28,
           ),
           label: 'catalogue',
         ),
@@ -52,7 +52,7 @@ class MyBottomBar extends StatelessWidget {
           icon: Image.asset(
             'assets/icons/notif_icon.png',
             color: colorfy(index, 3),
-            height: 30,
+            height: 30.5,
           ),
           label: 'notifications',
         ),

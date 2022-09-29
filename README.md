@@ -1,6 +1,7 @@
 # coffee_shop_app
 
 ![screenshot](./showcase/coffeshop-ui.png)
+![screenshot2](./showcase/screenshot2.png)
 
 A new Flutter project.
 
