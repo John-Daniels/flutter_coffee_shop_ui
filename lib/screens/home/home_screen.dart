@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     child: MyTabs(
                       tabController: tabController,
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
@@ -71,12 +71,68 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
 class MyTabs extends StatelessWidget {
   final TabController tabController;
-  const MyTabs({super.key, required this.tabController});
+  MyTabs({super.key, required this.tabController});
+
+  List tabs = [
+    {'title': 'Cappuccinno'},
+    {'title': 'Espresso'},
+    {'title': 'Late'},
+    {'title': 'Flat'}
+  ];
 
   @override
   Widget build(BuildContext context) {
-    // first tab data;
-    List<Coffee> firstTabData = [
+    return Column(
+      children: [
+        TabBar(
+          controller: tabController,
+          isScrollable: true,
+          padding: const EdgeInsets.only(bottom: 10),
+          indicator: DotIndicator(
+            color: Colors.orange.shade600,
+            distanceFromCenter: 23,
+            radius: 3,
+            paintingStyle: PaintingStyle.fill,
+          ),
+          labelColor: Colors.orange.shade600,
+          labelStyle: Theme.of(context)
+              .textTheme
+              .headline5!
+              .copyWith(fontWeight: FontWeight.w400, fontSize: 18),
+          unselectedLabelColor: Colors.grey.shade800,
+          tabs: [
+            // loop through the tabs
+            for (var tab in tabs) Tab(text: tab['title']),
+          ],
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10, left: 10),
+            child: TabBarView(
+              controller: tabController,
+              children: [
+                for (var tab in tabs) CoffeeTab(title: tab['title']),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class CoffeeTab extends StatelessWidget {
+  const CoffeeTab({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  final String title;
+// fetch an api with that title and get some data related to that
+
+  @override
+  Widget build(BuildContext context) {
+    List<Coffee> tabData = [
       Coffee(
           title: 'Cappuccino',
           addon: 'With Oat Milk',
@@ -103,61 +159,23 @@ class MyTabs extends StatelessWidget {
           imageUrl: 'assets/images/coffee1.jpg',
           price: 4.2),
     ];
+
     return Column(
       children: [
-        TabBar(
-          controller: tabController,
-          isScrollable: true,
-          padding: const EdgeInsets.only(bottom: 10),
-          indicator: DotIndicator(
-            color: Colors.orange.shade600,
-            distanceFromCenter: 23,
-            radius: 3,
-            paintingStyle: PaintingStyle.fill,
-          ),
-          labelColor: Colors.orange.shade600,
-          labelStyle: Theme.of(context)
-              .textTheme
-              .headline5!
-              .copyWith(fontWeight: FontWeight.w400, fontSize: 18),
-          unselectedLabelColor: Colors.grey.shade800,
-          tabs: const [
-            Tab(text: 'Cappuccinno'),
-            Tab(text: 'Espresso'),
-            Tab(text: 'Latte'),
-            Tab(text: 'Flat'),
-          ],
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10, left: 10),
-            child: TabBarView(
-              controller: tabController,
-              children: [
-                Column(
-                  children: [
-                    Section1(firstTabData: firstTabData),
-                  ],
-                ),
-                const Text('espress'),
-                const Text('Latte'),
-                const Text('Flat'),
-              ],
-            ),
-          ),
-        )
+        FirstTabSection(data: tabData)
+        // more sections here
       ],
     );
   }
 }
 
-class Section1 extends StatelessWidget {
-  const Section1({
+class FirstTabSection extends StatelessWidget {
+  const FirstTabSection({
     Key? key,
-    required this.firstTabData,
+    required this.data,
   }) : super(key: key);
 
-  final List<Coffee> firstTabData;
+  final List<Coffee> data;
 
   @override
   Widget build(BuildContext context) {
@@ -166,9 +184,9 @@ class Section1 extends StatelessWidget {
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        itemCount: firstTabData.length,
+        itemCount: data.length,
         itemBuilder: (_, index) {
-          var coffee = firstTabData[index];
+          var coffee = data[index];
 
           return BestCoffeeCard(
             title: coffee.title,
