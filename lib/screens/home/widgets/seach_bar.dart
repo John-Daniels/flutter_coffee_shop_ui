@@ -29,6 +29,7 @@ class MySearchBar extends StatelessWidget {
             Expanded(
               child: TextField(
                 style: TextStyle(color: Colors.grey.shade700),
+                autofocus: false,
                 decoration: InputDecoration(
                   hintText: 'Find Your Coffee',
                   hintStyle: Theme.of(context)

@@ -29,9 +29,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
       body: Padding(
         padding: const EdgeInsets.only(
-          top: 50.0,
-          right: 24,
-          left: 24,
+          top: 30.0,
+          right: 18,
+          left: 18,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,18 +39,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             const MyAppBar(),
             Text(
               'Find the best\ncoffee for you',
-              style: Theme.of(context).textTheme.headline4!.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(color: Colors.white, fontWeight: FontWeight.w500),
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30),
             const MySearchBar(),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30),
 
             Expanded(
               child: ListView(

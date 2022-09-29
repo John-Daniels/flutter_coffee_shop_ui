@@ -13,9 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Coffee Shop',
-      theme: ThemeData(
-          textTheme:
-              const TextTheme(bodyText2: TextStyle(color: Colors.white))),
+      theme: ThemeData.dark().copyWith(
+        textTheme: const TextTheme(
+          bodyText2: TextStyle(color: Colors.white),
+        ),
+      ),
       home: const HomeScreen(),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:coffee_shop_app/widgets/my_appbar_icon.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget {
@@ -9,7 +10,27 @@ class MyAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30),
-      child: Row(children: const [MyIcon(), Spacer(), MyAvater()]),
+      child: Row(
+        children: [
+          MyAppBarIcon(
+              icon: Icon(
+                Icons.dashboard,
+                size: 30,
+                color: Colors.grey.shade700,
+              ),
+              onTap: () {}),
+          const Spacer(),
+          MyAppBarIcon(
+            padding: 0,
+            icon: Image.asset(
+              'assets/images/my_avater.png',
+              fit: BoxFit.cover,
+              height: 45,
+            ),
+            onTap: () {},
+          )
+        ],
+      ),
     );
   }
 }
