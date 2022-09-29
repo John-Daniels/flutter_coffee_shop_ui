@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class PriceAndBuyButtonBar extends StatelessWidget {
   const PriceAndBuyButtonBar({
     Key? key,
+    required this.price,
   }) : super(key: key);
 
+  final double price;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -38,7 +40,7 @@ class PriceAndBuyButtonBar extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: '4.20',
+                      text: price.toStringAsFixed(2),
                       style: Theme.of(context).textTheme.headline6!.copyWith(
                             fontSize: 30,
                             letterSpacing: 1.2,

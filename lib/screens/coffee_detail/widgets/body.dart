@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../models/Coffee.dart';
 import '../../../widgets/my_appbar_icon.dart';
 import 'price_with_button_bar.dart';
 import 'title_with_actions.dart';
@@ -8,7 +9,10 @@ import 'title_with_actions.dart';
 class Body extends StatelessWidget {
   const Body({
     Key? key,
+    required this.coffee,
   }) : super(key: key);
+
+  final Coffee coffee;
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +31,20 @@ class Body extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: double.infinity,
-                        child: Image.asset(
-                          'assets/images/coffee3.jpg',
-                          fit: BoxFit.cover,
-                          alignment: Alignment.bottomCenter,
+                        child: Hero(
+                          tag:
+                              '${coffee.title} ${coffee.imageUrl} ${coffee.price}',
+                          child: Image.asset(
+                            coffee.imageUrl,
+                            fit: BoxFit.cover,
+                            alignment: Alignment.bottomCenter,
+                          ),
                         ),
                       ),
 
                       // title + actions
-
-                      const TitleAndActions()
+                      //inorder to reduce stress
+                      TitleAndActions(coffee: coffee)
                     ],
                   ),
                 ),
@@ -115,7 +123,7 @@ class Body extends StatelessWidget {
           const MyFloatingAppBar(),
 
           // bottom
-          const PriceAndBuyButtonBar()
+          PriceAndBuyButtonBar(price: coffee.price)
         ],
       ),
     );

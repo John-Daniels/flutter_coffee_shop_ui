@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/Coffee.dart';
 import 'coffee_detail_icon.dart';
 import 'my_backdrop.dart';
 
 class TitleAndActions extends StatelessWidget {
   const TitleAndActions({
     Key? key,
+    required this.coffee,
   }) : super(key: key);
+
+  final Coffee coffee;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,7 @@ class TitleAndActions extends StatelessWidget {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: 'Cappuccino\n',
+                            text: '${coffee.title}\n',
                             style:
                                 Theme.of(context).textTheme.headline4!.copyWith(
                                       fontSize: 28,
@@ -44,7 +48,7 @@ class TitleAndActions extends StatelessWidget {
                                     ),
                           ),
                           TextSpan(
-                            text: 'With Oat Milk',
+                            text: coffee.addon,
                             style:
                                 Theme.of(context).textTheme.bodySmall!.copyWith(
                                       fontSize: 20,

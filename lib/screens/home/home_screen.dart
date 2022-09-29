@@ -122,44 +122,43 @@ class MyTabs extends StatelessWidget {
 }
 
 class CoffeeTab extends StatelessWidget {
-  const CoffeeTab({
+  CoffeeTab({
     Key? key,
     required this.title,
   }) : super(key: key);
 
   final String title;
 // fetch an api with that title and get some data related to that
+  List<Coffee> tabData = [
+    Coffee(
+        title: 'Cappuccino',
+        addon: 'With Oat Milk',
+        imageUrl: 'assets/images/coffee3.jpg',
+        price: 4.20),
+    Coffee(
+        title: 'Cappuccino',
+        addon: 'With Chocolate',
+        imageUrl: 'assets/images/coffee2.jpg',
+        price: 3.14),
+    Coffee(
+        title: 'Cappuccino',
+        addon: 'With Oat Milk',
+        imageUrl: 'assets/images/coffee1.jpg',
+        price: 3.30),
+    Coffee(
+        title: 'Cappuccino',
+        addon: 'With Oat Milk',
+        imageUrl: 'assets/images/coffee1.jpg',
+        price: 5.10),
+    Coffee(
+        title: 'Cappuccino',
+        addon: 'With Oat Milk',
+        imageUrl: 'assets/images/coffee1.jpg',
+        price: 2.20),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    List<Coffee> tabData = [
-      Coffee(
-          title: 'Cappuccino',
-          addon: 'With Oat Milk',
-          imageUrl: 'assets/images/coffee3.jpg',
-          price: 4.2),
-      Coffee(
-          title: 'Cappuccino',
-          addon: 'With Chocolate',
-          imageUrl: 'assets/images/coffee2.jpg',
-          price: 3.14),
-      Coffee(
-          title: 'Cappuccino',
-          addon: 'With Oat Milk',
-          imageUrl: 'assets/images/coffee1.jpg',
-          price: 4.2),
-      Coffee(
-          title: 'Cappuccino',
-          addon: 'With Oat Milk',
-          imageUrl: 'assets/images/coffee1.jpg',
-          price: 4.2),
-      Coffee(
-          title: 'Cappuccino',
-          addon: 'With Oat Milk',
-          imageUrl: 'assets/images/coffee1.jpg',
-          price: 4.2),
-    ];
-
     return Column(
       children: [
         FirstTabSection(data: tabData)
@@ -196,7 +195,7 @@ class FirstTabSection extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const CoffeeDetail(),
+                  builder: (context) => CoffeeDetail(coffee: coffee),
                 ),
               );
             },
